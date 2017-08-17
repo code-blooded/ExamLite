@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ExamLiTE | Registration Page</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
+
+</head>
+<body class="hold-transition register-page">
+<div class="register-box">
+  <div class="register-logo">
+    <a href="about.html"><b>Exam</b>LiTE</a>
+  </div>
+
+  <div class="register-box-body">
+    <p class="login-box-msg">Register a new membership</p>
+
+    <form action="../php/add_member.php" onsubmit="return check_match()" method="post"> 
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" placeholder="User Name" id="uname" name="uname">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="email" class="form-control" placeholder="Email" id="email" name="email">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="Password" id="pass" name="pass">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="Retype password" id="rpass" name="rpass">
+        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox" id="terms_box"> I agree to the <a href="terms.html">terms</a>
+            </label>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <input type="submit" value="Register" class="btn btn-primary btn-block btn-flat"></input>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+    <div class="social-auth-links text-center">
+      <p>- OR -</p>
+      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using
+        Google+</a>
+    </div>
+
+    <a href="login.html" class="text-center">I already have a membership</a>
+  </div>
+  <!-- /.form-box -->
+</div>
+<!-- /.register-box -->
+
+<!-- jQuery 2.2.3 -->
+<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../bootstrap/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="../plugins/iCheck/icheck.min.js"></script>
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+  function check_match() {
+    var un = document.getElementById("uname").value;
+	var em = document.getElementById("email").value;
+    var pass1 = document.getElementById("pass").value;
+    var pass2 = document.getElementById("rpass").value;
+	//var tb = document.getElementById("terms_box").value;
+    var ok = true;
+	if(un==""){
+		document.getElementById("uname").style.borderColor = "#E34234";
+		alert("User Name can't be empty!!!");
+		ok = false;
+	}
+	else if(em==""){
+		document.getElementById("uname").style.borderColor = "none";
+		document.getElementById("email").style.borderColor = "#E34234";
+		alert("Email can't be empty!!!");
+		ok = false;
+	}
+	else if(pass1=="" || pass2==""){
+		alert("Passwords can't be empty!!!");
+		document.getElementById("email").style.borderColor = "none";
+		document.getElementById("rpass").style.borderColor = "#E34234";
+        document.getElementById("pass").style.borderColor = "#E34234";
+		ok = false;
+	}
+	else if(pass1 != pass2){
+        alert("Passwords do not match");
+		document.getElementById("email").style.borderColor = "none";
+        document.getElementById("rpass").style.borderColor = "#E34234";
+        document.getElementById("pass").style.borderColor = "#E34234";
+        ok = false;
+    }else if(!document.getElementById('terms_box').checked){
+		document.getElementById("rpass").style.borderColor = "none";
+        document.getElementById("pass").style.borderColor = "none";
+		alert("Accept the terms, please!");
+		ok = false;
+	}
+
+	return ok;
+  }
+</script>
+</body>
+</html>
